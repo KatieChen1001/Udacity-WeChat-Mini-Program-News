@@ -19,9 +19,7 @@ Page({
 
   onLoad: function (options) {
     this.setData({
-      section: options.section,
-      navbarItemSize: options.navbarItemSize,
-      navbarItemWeight: options.navbarItemWeight
+      section: options.section
     });
     this.getNYapi();
   },
@@ -60,7 +58,6 @@ Page({
     wx.request({
       url: 'https://api.nytimes.com/svc/topstories/v2/' + this.data.section + '.json?api-key=1530f46a85644e70a995e7403562704b',
       success: res => {
-        console.log(res.data.results);
         let result = res.data.results;
         let newslistres = [];
 

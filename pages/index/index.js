@@ -52,7 +52,6 @@ Page({
     wx.request({
       url: 'https://api.nytimes.com/svc/topstories/v2/' + sectionNameEng[this.data.section] + '.json?api-key=1530f46a85644e70a995e7403562704b',
       success: res => {
-        console.log(res.data.results);
         let result = res.data.results;
         let newslistres = [];
         let scrollNews = [];
@@ -127,6 +126,10 @@ Page({
         callback && callback();
         // added console log to show pull down refresh has been stopped, because NY API is updated by day
         console.log("Stopped pull down refresh")
+      },
+
+      fail: function({errorMes}){
+        console.log("request fail ", errorMes);
       }
     })
   }
