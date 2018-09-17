@@ -1,0 +1,18 @@
+<!--pages/detail/detail.wxml-->
+<view class='newsDetailWrapper'>
+  <text class='newsDetailTitle'>{{title}}</text>
+
+  <view class='newsDetailByLineContainer'>
+    <text class='newsDetailAuthor'>{{author}}</text>
+    <text class='newsDetailDate'>{{date}}</text>
+  </view>
+
+  <view class='headerImgContainer'>
+    <image src='{{img}}' class='headerImg'></image>
+    <view class='headerImgCopyright'>{{copyright}}</view>
+  </view>
+
+  <view class='newsDetailContentContainer'>
+    {{content}}
+  </view>
+</view>
