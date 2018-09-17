@@ -2,17 +2,9 @@
 <!-- -wrapper 表示功能区，划分界面 -->
 <!-- -container 表示包含内容的容器 设有固定不变的padding，margin等 -->
 <scroll-view scroll-x>
-<view class="top-nav-bar-wrapper">
-  <view class="category {{section == '头条'? 'categoryEmph' : ''}}"  data-section="头条">头条</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="财经">财经</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="观点">观点</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="科技">科技</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="国际">国际</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="体育">体育</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="房产">房产</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="时尚">时尚</view>
-  <view class="category" bindtap='onTapNavigateAway' data-section="杂志">杂志</view>
-</view>
+  <view class="top-nav-bar-wrapper">
+    <view wx:for="{{categories}}" class="{{'{{section}}' == '{{item}}' ? 'categoryEmph' : 'category'}}"  bindtap='onTapNavigateAway' data-section="{{item}}">{{item}}</view>
+  </view>
 </scroll-view>
 <view class="top-story-img-wrapper">
   <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000" indicator-color="rgba(250,250,250,0.30)" indicator-active-color="#ffffff">  

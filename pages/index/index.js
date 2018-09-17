@@ -15,6 +15,17 @@ const sectionNameEng = {
 
 Page({ 
   data: {
+    categories: [
+      "头条",
+      "财经",
+      "观点",
+      "科技",
+      "国际",
+      "体育",
+      "房产",
+      "时尚",
+      "杂志"
+    ],
     section: "头条",
     scrollableNews: [],
     newslist: []
@@ -33,11 +44,11 @@ Page({
   },
 
   onTapNavigateAway(event) {
-    // 使用redirectTo，不保留上一页信息（因为两页面间没有递进的逻辑关系）
-    let dataPassed = event.currentTarget.dataset;
-    wx.redirectTo({
-      url: '/pages/list/list?section=' + sectionNameEng[dataPassed.section] + "&navbarItemSize=30rpx&navbarItemWeight=700"
-    })
+    this.setData({
+      section: event.currentTarget.dataset.section
+    });
+    this.getNYapi();
+    console.log(this.data.section);
   },
 
   onPullDownRefresh() {
@@ -49,6 +60,9 @@ Page({
   },
 
   getNYapi(callback){
+    wx.showLoading({
+      title: 'Loading',
+    });
     wx.request({
       url: 'https://api.nytimes.com/svc/topstories/v2/' + sectionNameEng[this.data.section] + '.json?api-key=1530f46a85644e70a995e7403562704b',
       success: res => {
@@ -59,7 +73,7 @@ Page({
         // ======= 首页滚动新闻栏 ======= //
         for (let i = 0; i < result.length; i++) {
           // console.log(result[i].section);
-          if (result[i].section === "U.S." && scrollNews.length <=5 ) {
+          if (scrollNews.length <=5 ) {
             if (result[i].multimedia.length < 3) {
               scrollNews.push({
                 url: "/images/generic.jpg",
@@ -123,7 +137,8 @@ Page({
       },
 
       complete: () => {
-        callback && callback();
+        wx.hideLoading();
+        typeof callback === 'function' && callback();
         // added console log to show pull down refresh has been stopped, because NY API is updated by day
         console.log("Stopped pull down refresh")
       },
