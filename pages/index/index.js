@@ -1,5 +1,6 @@
 //index.js
 
+// NYTimes API Key: n2HCexykDrpPGWv7ew8eU2nvlCzCPGoX
 // 将中文菜单栏内容转为api请求的关键词
 const sectionNameEng = {
   "头条": "national",
@@ -64,8 +65,9 @@ Page({
       title: 'Loading',
     });
     wx.request({
-      url: 'https://api.nytimes.com/svc/topstories/v2/' + sectionNameEng[this.data.section] + '.json?api-key=1530f46a85644e70a995e7403562704b',
+      url: 'https://api.nytimes.com/svc/topstories/v2/' + sectionNameEng[this.data.section] + '.json?api-key=n2HCexykDrpPGWv7ew8eU2nvlCzCPGoX',
       success: res => {
+        console.log(res);
         let result = res.data.results;
         let newslistres = [];
         let scrollNews = [];
